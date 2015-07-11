@@ -4,8 +4,38 @@
     <script src="audio.js"></script>
   </head>
   <body>
-    <div>
-      <h1>Placeholder text.</h1>
+    <h1>Placeholder text.</h1>
+    <div class="controls">
+      <input id="start" type="button" value="Start" />
+      <input id="stop" type="button" value="Stop" />
+      Mute
+      <input id="mute-button" type="checkbox" value="Mute" />
+
+      <script>
+        var noisemaker = new Noisemaker();
+        
+        var startButton = document.getElementById("start");
+        startButton.addEventListener("click", function() {
+            noisemaker.start();
+            }, false);
+        
+        var stopButton = document.getElementById("stop");
+        var stopped = false;
+        stopButton.addEventListener("click", function() {
+              if (!stopped) {
+                noisemaker.stop();
+                stopped = true;
+              } else { alert("Can only stop the audio once!"); }
+            }, false);
+
+        var muteButton = document.getElementById("mute-button");
+        muteButton.addEventListener("click", function() {
+              // If checked, audio was just muted.
+              if (muteButton.checked) {
+                  noisemaker.mute();
+              } else { noisemaker.unmute(); }
+            }, false);
+      </script>
     </div>
   </body>
 </html>
