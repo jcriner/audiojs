@@ -20,6 +20,17 @@ Noisemaker.prototype.stop = function() {
     this.oscillator.stop();
 }
 
+// |volume| arg can be between 0 and 1.
+Noisemaker.prototype.setVolume = function(vol) {
+    // Do nothing if vol setting is out of range.
+    if (vol < 0 || vol > 1) {
+        return;
+    }
+    this.gainNode.gain.value = vol;
+    this.lastVolumeSetting = this.gainNode.gain.value;
+}
+
+
 Noisemaker.prototype.isMuted = function() {
     return this.isMuted;
 }
