@@ -10,6 +10,7 @@
       <input id="stop" type="button" value="Stop" />
       Mute
       <input id="mute-button" type="checkbox" value="Mute" />
+      <input id="vol-slider" type="range" value="1" min="0" max="1" step="0.01" />
 
       <script>
         var noisemaker = new Noisemaker();
@@ -35,6 +36,11 @@
                   noisemaker.mute();
               } else { noisemaker.unmute(); }
             }, false);
+
+        var volSlider = document.getElementById("vol-slider");
+        volSlider.addEventListener("change", function() {
+             noisemaker.setVolume(volSlider.value);
+          }, false);
       </script>
     </div>
   </body>
