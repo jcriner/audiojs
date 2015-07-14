@@ -20,6 +20,12 @@ Noisemaker.prototype.stop = function() {
     this.oscillator.stop();
 }
 
+Noisemaker.prototype.setFrequency = function(frequency) {
+    var now = this.context.currentTime;
+    this.oscillator.frequency.setValueAtTime(frequency, now);
+}
+
+
 // |volume| arg can be between 0 and 1.
 Noisemaker.prototype.setVolume = function(vol) {
     // Do nothing if vol setting is out of range.
