@@ -32,8 +32,14 @@ Noisemaker.prototype.setVolume = function(vol) {
     if (vol < 0 || vol > 1) {
         return;
     }
-    this.gainNode.gain.value = vol;
-    this.lastVolumeSetting = this.gainNode.gain.value;
+
+    // If we're not muted, update the current volume. Otherwise, the
+    // new volume setting will come into effect when the Noisemaker is
+    // unmuted.
+    if (!this.isMuted) {
+        this.gainNode.gain.value = vol;
+    }
+    this.lastVolumeSetting = vol;
 }
 
 
@@ -44,6 +50,7 @@ Noisemaker.prototype.isMuted = function() {
 Noisemaker.prototype.mute = function() {
     this.lastVolumeSetting = this.gainNode.gain.value;
     this.gainNode.gain.value = 0;
+    this.isMuted = true;
 }
 
 Noisemaker.prototype.unmute = function() {
