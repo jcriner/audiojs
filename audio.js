@@ -64,7 +64,10 @@ Noisemaker.prototype.unmute = function() {
 // GainNode. The GainNode can then be hooked up to the context
 // destination (e.g. speakers).
 
-// TODO:
-//   * vary frequency over time
-//   * connect sound volume to a simple API, connected to a slider
-//   * connect pitch to some kind of discrete keyboard entity
+// Tasks/ideas:
+//   * TODO: vary frequency over time
+//   * DONE: connect sound volume to a simple API, connected to a slider
+//   * TODO: connect pitch to some kind of discrete keyboard entity
+//   * TODO: Variant noisemaker that produces a sound when given a
+//           value (e.g. noisemaker.makeSound(frequency)), and then
+//           only plays the note for some set period of time.
