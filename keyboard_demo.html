@@ -5,28 +5,23 @@
     <script>
       var ctx = new AudioContext();
       var oscillator;
-      window.addEventListener("keydown", function(event) {
+      window.onkeydown = function(event) {
         // The null check performed in this conditional is to prevent
         // additional oscillators from being created as the key is
         // held down.
-        if (event.which == 65 /* 'a' */ && oscillator == null) {
+        if (event.keyCode == 65 /* 'a' */ && oscillator == null) {
           oscillator = ctx.createOscillator();
           oscillator.connect(ctx.destination);
           oscillator.start(0);
-        } else {
-          // TODO: This will uselessly print out a number--the scan
-          // code--rather than giving you an actual key pressed.
-          console.log("User pressed " + event.which +
-                      ", but they should have pressed 'a'.");
         }
-      }, false);
+      };
 
-      window.addEventListener("keyup", function(event) {
+      window.onkeyup = function(event) {
         if (event.which == 65 /* 'a' */) {
           oscillator.stop();
           oscillator = null;
         }
-      }, false);
+      };
     </script>
   </head>
   <body>
