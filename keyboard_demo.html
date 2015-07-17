@@ -5,19 +5,24 @@
     <script>
       var ctx = new AudioContext();
       var oscillator;
+      var currentKey;
       window.onkeydown = function(event) {
         // The null check performed in this conditional is to prevent
         // additional oscillators from being created as the key is
         // held down.
-        if (event.keyCode == 65 /* 'a' */ && oscillator == null) {
+        if (oscillator == null) {
           oscillator = ctx.createOscillator();
+          // The value for the frequency should come out to a reasonable
+          // audible range.
+          currentKey = event.keyCode;
+          oscillator.frequency.value = currentKey * 10;
           oscillator.connect(ctx.destination);
           oscillator.start(0);
         }
       };
 
       window.onkeyup = function(event) {
-        if (event.which == 65 /* 'a' */) {
+        if (event.keyCode == currentKey) {
           oscillator.stop();
           oscillator = null;
         }
@@ -26,6 +31,6 @@
   </head>
   <body>
     <h1>Keyboard Demo</h1>
-    <p>Press 'a' to make a sound!</p>
+    <p>Press a key to make a sound! Try different ones, too.</p>
   </body>
 </html>
