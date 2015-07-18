@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+var ctx = new (window.AudioContext || window.webkitAudioContext)();
+var source;
+
+var request = new XMLHttpRequest();
+request.open('GET', 'These Mistakes Are Mine Alone.mp3', true);
+request.responseType = 'arraybuffer';
+
+request.onload = function() {
+    var audioData = request.response;
+    ctx.decodeAudioData(audioData, function(buffer) {
+        source.buffer = buffer;
+        source.connect(ctx.destination);
+        source.loop = true;
+    });  // TODO: Add error-handling.
+}
+
+request.send();
+    
+source.start();
+    </script>
+  </head>
+  <body>
+    <h1>Play a Song</h1>
+  </body>
+</html>
